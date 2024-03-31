@@ -1,40 +1,44 @@
+-- Insert new Students
 INSERT INTO student (name, birthday, groupnumber) VALUES
-                                                      ('John', '2015-01-01', 1),
-                                                      ('Chris', '2015-02-02', 1),
-                                                      ('Carl', '2015-03-03', 1),
-                                                      ('Oliver', '2014-01-01', 2),
-                                                      ('James', '2014-02-02', 2),
-                                                      ('Lucas', '2014-03-03', 2),
-                                                      ('Henry', '2014-04-04', 2),
-                                                      ('Jacob', '2013-01-01', 3),
-                                                      ('Logan', '2013-02-02', 3),
-                                                      ('Emily', '2012-01-01', 4),
-                                                      ('Sophia', '2012-02-02', 4),
-                                                      ('Michael', '2011-01-01', 5),
-                                                      ('William', '2011-02-02', 5);
+                                                      ('John', '2000-01-01', 1),
+                                                      ('Chris', '2000-02-02', 1),
+                                                      ('Carl', '2000-03-03', 1),
+                                                      ('Oliver', '2000-04-04', 2),
+                                                      ('James', '2000-05-05', 2),
+                                                      ('Lucas', '2000-06-06', 2),
+                                                      ('Henry', '2000-07-07', 2),
+                                                      ('Jacob', '2000-08-08', 3),
+                                                      ('Logan', '2000-09-09', 3);
 
+-- Insert new Subjects
 INSERT INTO subject (name, description, grade) VALUES
-                                                   ('Art and Music', 'Art and music subject for grade 1', 1),
-                                                   ('Geography and History', 'Geography and history subject for grade 2', 2),
-                                                   ('PE and Math', 'PE and math subject for grade 3', 3),
-                                                   ('Science', 'Science subject for grade 4', 4),
-                                                   ('IT', 'IT subject for grade 4', 4),
-                                                   ('Physics', 'Physics subject for grade 5', 5),
-                                                   ('Chemistry', 'Chemistry subject for grade 5', 5);
+                                                   ('Art and music', 'Art and music for 1 grade', 1),
+                                                   ('Geography', 'Geography and history for 2 grade', 2),
+                                                   ('History', 'Geography and history for 2 grade', 2),
+                                                   ('PE', 'PE and math for 3 grade', 3),
+                                                   ('Math', 'PE and math for 3 grade', 3),
+                                                   ('Science', 'Science and IT for 4 grade', 4),
+                                                   ('IT', 'Science and IT for 4 grade', 4),
+                                                   ('Extra Subject 1', 'Additional subject for 5 grade', 5),
+                                                   ('Extra Subject 2', 'Additional subject for 5 grade', 5);
 
+-- Insert Payment Types
 INSERT INTO paymenttype (name) VALUES
                                    ('DAILY'),
                                    ('WEEKLY'),
                                    ('MONTHLY');
 
+-- Insert Payments
 INSERT INTO payment (type_id, amount, payment_date, student_id) VALUES
-                                                                    (2, 50.00, '2024-03-31', 1),
-                                                                    (3, 100.00, '2024-03-31', 4),
-                                                                    (2, 50.00, '2024-03-31', 7),
-                                                                    (1, 10.00, '2024-03-31', 5);
+                                                                    ((SELECT id FROM paymenttype WHERE name = 'WEEKLY'), 100.00, NOW(), (SELECT id FROM student WHERE name = 'John')),
+                                                                    ((SELECT id FROM paymenttype WHERE name = 'MONTHLY'), 200.00, NOW(), (SELECT id FROM student WHERE name = 'Oliver')),
+                                                                    ((SELECT id FROM paymenttype WHERE name = 'WEEKLY'), 150.00, NOW(), (SELECT id FROM student WHERE name = 'Henry')),
+                                                                    ((SELECT id FROM paymenttype WHERE name = 'DAILY'), 10.00, NOW(), (SELECT id FROM student WHERE name = 'James'));
+
+-- Insert Marks
 INSERT INTO mark (student_id, subject_id, mark) VALUES
-                                                    (2, 1, 8),
-                                                    (4, 2, 5),
-                                                    (5, 2, 9),
-                                                    (8, 3, 4),
-                                                    (9, 3, 9);
+                                                    ((SELECT id FROM student WHERE name = 'Chris'), (SELECT id FROM subject WHERE name = 'Art and music'), 8),
+                                                    ((SELECT id FROM student WHERE name = 'Oliver'), (SELECT id FROM subject WHERE name = 'History'), 5),
+                                                    ((SELECT id FROM student WHERE name = 'James'), (SELECT id FROM subject WHERE name = 'Geography'), 9),
+                                                    ((SELECT id FROM student WHERE name = 'Jacob'), (SELECT id FROM subject WHERE name = 'Math'), 4),
+                                                    ((SELECT id FROM student WHERE name = 'Logan'), (SELECT id FROM subject WHERE name = 'PE'), 9);
