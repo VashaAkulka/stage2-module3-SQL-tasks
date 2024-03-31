@@ -1,47 +1,41 @@
-sql
-Copy
--- Insert new students
-INSERT INTO student (name, birthday, groupnumber)
-VALUES ('John', '2009-01-01', 1),
-       ('Chris', '2009-02-01', 1),
-       ('Carl', '2009-03-01', 1),
-       ('Oliver', '2008-01-01', 2),
-       ('James', '2008-02-01', 2),
-       ('Lucas', '2008-03-01', 2),
-       ('Henry', '2008-04-01', 2),
-       ('Jacob', '2007-01-01', 3),
-       ('Logan', '2007-02-01', 3);
-
--- Insert new subjects
-INSERT INTO subject (name, description, grade)
-VALUES ('Art', 'Art and music', 1),
-       ('Music', 'Art and music', 1),
-       ('Geography', 'Geography and history', 2),
-       ('History', 'Geography and history', 2),
-       ('PE', 'PE and math', 3),
-       ('Math', 'PE and math', 3),
-       ('Science', 'Science and IT', 4),
-       ('IT', 'Science and IT', 4),
-       ('Subject1', 'Subject for grade 5', 5),
-       ('Subject2', 'Subject for grade 5', 5);
-
--- Insert new payment types
-INSERT INTO paymenttype (name)
-VALUES ('DAILY'),
-       ('WEEKLY'),
-       ('MONTHLY');
-
--- Insert new payments
-INSERT INTO payment (type_id, amount, payment_date, student_id)
-VALUES ((SELECT id FROM paymenttype WHERE name = 'WEEKLY'), 100.0, NOW(), (SELECT id FROM student WHERE name = 'John')),
-       ((SELECT id FROM paymenttype WHERE name = 'MONTHLY'), 500.0, NOW(), (SELECT id FROM student WHERE name = 'Oliver')),
-       ((SELECT id FROM paymenttype WHERE name = 'WEEKLY'), 150.0, NOW(), (SELECT id FROM student WHERE name = 'Henry')),
-       ((SELECT id FROM paymenttype WHERE name = 'DAILY'), 20.0, NOW(), (SELECT id FROM student WHERE name = 'James'));
-
--- Insert new marks
-INSERT INTO mark (student_id, subject_id, mark)
-VALUES ((SELECT id FROM student WHERE name = 'Chris'), (SELECT id FROM subject WHERE name = 'Art'), 8),
-       ((SELECT id FROM student WHERE name = 'Oliver'), (SELECT id FROM subject WHERE name = 'History'), 5),
-       ((SELECT id FROM student WHERE name = 'James'), (SELECT id FROM subject WHERE name = 'Geography'), 9),
-       ((SELECT id FROM student WHERE name = 'Jacob'), (SELECT id FROM subject WHERE name = 'Math'), 4),
-       ((SELECT id FROM student WHERE name = 'Logan'), (SELECT id FROM subject WHERE name = 'PE'), 9);
+INSERT INTO student (name, groupnumber, birthday) values ('John', 1, '1974-03-09');
+INSERT INTO student (name, groupnumber, birthday) values ('Chris', 1, '1974-03-09');
+INSERT INTO student (name, groupnumber, birthday) values ('Carl', 1, '1974-03-09');
+INSERT INTO student (name, groupnumber, birthday) values ('Oliver', 2, '1974-03-09');
+INSERT INTO student (name, groupnumber, birthday) values ('James', 2, '1974-03-09');
+INSERT INTO student (name, groupnumber, birthday) values ('Lucas', 2, '1974-03-09');
+INSERT INTO student (name, groupnumber, birthday) values ('Henry', 2, '1974-03-09');
+INSERT INTO student (name, groupnumber, birthday) values ('Jacob', 3, '1974-03-09');
+INSERT INTO student (name, groupnumber, birthday) values ('Logan', 3, '1974-03-09');
+INSERT INTO student (name, groupnumber, birthday) values ('New', 4, '1974-03-09');
+INSERT INTO student (name, groupnumber, birthday) values ('Kid', 4, '1974-03-09');
+INSERT INTO student (name, groupnumber, birthday) values ('Block', 5, '1974-03-09');
+INSERT INTO student (name, groupnumber, birthday) values ('Game', 5, '1974-03-09');
+INSERT INTO subject (name, grade, description, id) values ('Art', 1, 'EMPTY', 1);
+INSERT INTO subject (name, grade, description) values ('Music', 1, 'EMPTY');
+INSERT INTO subject (name, grade, description) values ('Geography', 2, 'EMPTY');
+INSERT INTO subject (name, grade, description) values ('History', 2, 'EMPTY');
+INSERT INTO subject (name, grade, description) values ('PE', 3, 'EMPTY');
+INSERT INTO subject (name, grade, description) values ('Math', 3, 'EMPTY');
+INSERT INTO subject (name, grade, description) values ('Science', 4, 'EMPTY');
+INSERT INTO subject (name, grade, description) values ('IT', 4, 'EMPTY');
+INSERT INTO subject (name, grade, description) values ('Geo', 5, 'EMPTY');
+INSERT INTO subject (name, grade, description) values ('The', 5, 'EMPTY');
+insert into paymenttype ( name) values ('DAILY');
+insert into paymenttype ( name) values ('WEEKLY');
+insert into paymenttype ( name) values ('MONTHLY');
+INSERT INTO payment (type_id, student_id, amount, payment_date) values (SELECT id FROM paymenttype WHERE name = 'WEEKLY', SELECT id FROM student WHERE name = 'John', 301.19, '2020-07-02 17:45:36');
+INSERT INTO payment (type_id, student_id, amount, payment_date) values (SELECT id FROM paymenttype WHERE name = 'MONTHLY', SELECT id FROM student WHERE name = 'Oliver', 301.19, '2020-07-02 17:45:36');
+INSERT INTO payment (type_id, student_id, amount, payment_date) values (SELECT id FROM paymenttype WHERE name = 'WEEKLY', SELECT id FROM student WHERE name = 'Henry', 301.19, '2020-07-02 17:45:36');
+INSERT INTO payment (type_id, student_id, amount, payment_date) values (SELECT id FROM paymenttype WHERE name = 'DAILY', SELECT id FROM student WHERE name = 'James', 301.19, '2020-07-02 17:45:36');
+INSERT INTO payment (type_id, student_id, amount, payment_date) values (1, 6, 301.19, '2020-07-02 17:45:36');
+INSERT INTO payment (type_id, student_id, amount, payment_date) values (2, 10, 301.19, '2020-07-02 17:45:36');
+INSERT INTO payment (type_id, student_id, amount, payment_date) values (3, 2, 301.19, '2020-07-02 17:45:36');
+INSERT INTO mark (mark, student_id, subject_id) values (8, 2, 1);
+INSERT INTO mark (mark, student_id, subject_id) values (5, 4, 4);
+INSERT INTO mark (mark, student_id, subject_id) values (9, 5, 3);
+INSERT INTO mark (mark, student_id, subject_id) values (4, 8, 6);
+INSERT INTO mark (mark, student_id, subject_id) values (9, 9, 5);
+INSERT INTO mark (mark, student_id, subject_id) values (3, 3, 3);
+INSERT INTO mark (mark, student_id, subject_id) values (6, 5, 2);
+INSERT INTO mark (mark, student_id, subject_id) values (7, 1, 5);
